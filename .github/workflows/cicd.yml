@@ -1,35 +1,73 @@
-name: Deploy Frontend to EC2
+# name: Deploy Frontend to EC2
 
-on:
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Source
+#         uses: actions/checkout@v4
+
+#       - name: Login to Docker Hub
+#         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+#       - name: Build Docker Image
+#         run: docker build -t hunderedacress/crm_100acress_conosle_frontend .
+
+#       - name: Push Image
+#         run: docker push hunderedacress/crm_100acress_conosle_frontend:latest
+
+#   deploy:
+#     needs: build
+#     runs-on: self-hosted
+#     steps:
+#       - name: Pull from Docker Hub
+#         run: docker pull hunderedacress/crm_100acress_conosle_frontend:latest
+
+#       - name: Remove old container
+#         run: docker rm -f typescript-frontend-container || true
+
+#       - name: Run new container
+#         run: docker run -d -p 5000:80 --name typescript-frontend-container hunderedacress/crm_100acress_conosle_frontend
+
+
+name: Deploy web100Acress-crm-100acress-console-frontend
+
+on: 
   push:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} 
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t hunderedacress/crm_100acress_conosle_frontend .
+        run: docker build -t hunderedacress/crm_100acress_conosle_frontend  .
 
-      - name: Push Image
-        run: docker push hunderedacress/crm_100acress_conosle_frontend:latest
 
+      - name: Publish Image to docker hub
+        run: docker push hunderedacress/crm_100acress_conosle_frontend:latest 
+ 
   deploy:
     needs: build
-    runs-on: self-hosted
+    runs-on: self-hosted 
     steps:
-      - name: Pull from Docker Hub
-        run: docker pull hunderedacress/crm_100acress_conosle_frontend:latest
-
-      - name: Remove old container
-        run: docker rm -f typescript-frontend-container || true
-
-      - name: Run new container
-        run: docker run -d -p 5000:80 --name typescript-frontend-container hunderedacress/crm_100acress_conosle_frontend
+      - name: Pull image from docker hub
+        run: docker pull hunderedacress/crm_100acress_conosle_frontend:latest 
+      - name: Delete old container
+        run: |
+            if [ "$(docker ps -aq -f name=crm-hundredacress-frontend-container)" ]; then
+            docker rm -f crm-hundredacress-frontend-container
+            fi
+      - name: Run Docker Container
+        run: docker run -d -p 3000:80 --name hundredacress-frontend-container  hunderedacress/crm_100acress_conosle_frontend 

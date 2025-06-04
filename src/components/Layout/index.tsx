@@ -37,11 +37,12 @@ const layoutStyle = {
 };
 
 export const MainLayout: React.FC = () => {
-  const [selectedKey, setSelectedKey] = useState<string>('dashboard');
+  // const [selectedKey, setSelectedKey] = useState<string>('dashboard');
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const handleSelectKey = (key: string) => {
     const selectedkey = key.replace("/", "");
-    setSelectedKey(selectedkey);
+    // setSelectedKey(selectedkey);
+    console.log(selectedkey)
   };
 
   return (

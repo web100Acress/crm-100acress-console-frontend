@@ -67,7 +67,7 @@ const Authslice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action) => {},
+    setUser: (state, action) => {console.log(state,action)},
   },
   extraReducers: (builder) => {
     builder
@@ -99,6 +99,7 @@ const Authslice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
         state.isAuthenticated = false;
+        console.log(action)
       })
       .addCase(logOutUser.pending, (state) => {
         state.isloading = true;

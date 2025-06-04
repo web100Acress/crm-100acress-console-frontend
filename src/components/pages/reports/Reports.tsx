@@ -1,13 +1,13 @@
 import React from 'react';
 import { Row, Col, Card } from 'antd';
-import type { TableColumnsType, TableProps } from 'antd';
+// import type { TableColumnsType, TableProps } from 'antd';
 
-interface DataType {
-  key: React.Key;
-  name: string;
-  age: number;
-  address: string;
-}
+// interface DataType {
+//   key: React.Key;
+//   name: string;
+//   age: number;
+//   address: string;
+// }
 
 // const columns: TableColumnsType<DataType> = [
 //   {

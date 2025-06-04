@@ -52,22 +52,22 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t hunderedacress/crm_100acress_conosle_frontend  .
+        run: docker build -t hunderedacress/crm_100acress_console_frontend  .
 
 
       - name: Publish Image to docker hub
-        run: docker push hunderedacress/crm_100acress_conosle_frontend:latest 
+        run: docker push hunderedacress/crm_100acress_console_frontend:latest 
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull hunderedacress/crm_100acress_conosle_frontend:latest 
+        run: docker pull hunderedacress/crm_100acress_console_frontend:latest 
       - name: Delete old container
         run: |
             if [ "$(docker ps -aq -f name=crm-hundredacress-frontend-container)" ]; then
             docker rm -f crm-hundredacress-frontend-container
             fi
       - name: Run Docker Container
-        run: docker run -d -p 3000:80 --name hundredacress-frontend-container  hunderedacress/crm_100acress_conosle_frontend 
+        run: docker run -d -p 3000:80 --name hundredacress-frontend-container  hunderedacress/crm_100acress_console_frontend 

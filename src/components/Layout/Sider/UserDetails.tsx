@@ -1,7 +1,7 @@
 import React from 'react';
-import {  Menu, message } from 'antd';
+import {  Menu } from 'antd';
 import type { MenuProps } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../store/hooks';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';

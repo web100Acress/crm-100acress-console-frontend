@@ -1,7 +1,7 @@
 import { Button, Card, Col, Divider, Input, Modal, Row, Select } from 'antd';
-import { AlertTriangle, Divide, PhoneCall } from 'lucide-react';
+import { AlertTriangle,  PhoneCall } from 'lucide-react';
 import { useState } from 'react';
-import { CalendarOutlined ,DownloadOutlined,PlusOutlined } from '@ant-design/icons'; 
+import { CalendarOutlined ,DownloadOutlined } from '@ant-design/icons'; 
 const SuperAdminDashboard = () => {
   const [NewLeadopen, setNewLeadOpen] = useState(false);
   const [NewUserOpen, setNewUserOpen] = useState(false);

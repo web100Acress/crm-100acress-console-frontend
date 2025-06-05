@@ -52,7 +52,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t hunderedacress/crm_100acress_console_frontend :latest  .
+        run: docker build -t hunderedacress/crm_100acress_console_frontend:latest  .
 
 
       - name: Publish Image to docker hub
